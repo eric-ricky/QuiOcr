@@ -36,16 +36,24 @@ export default async function handler(
 
       console.log(document.toString());
 
+      const nameOfSupplier = `${document.supplierName.value}`;
+      let pin = '';
+      let descOfGoods = `${document.category.value?.toUpperCase()}`;
+
+      if (nameOfSupplier.includes('NAIVAS')) {
+        pin = 'P051123223G';
+        descOfGoods = 'ASSORTED ITEMS';
+      } else if (nameOfSupplier.includes('DISTON')) {
+        pin = 'P0519268961';
+        descOfGoods = 'FUEL';
+      }
+
       const meaningFulData: IRecieptDetails = {
         nameOfSupplier: `${document.supplierName.value}`,
         invoiceDate: `${document.date.value}`,
         invoiceNumber: '',
-        pin: document.supplierName.value?.includes('DISTON')
-          ? 'P0519268961'
-          : '',
-        descOfGoods: document.supplierName.value?.includes('DISTON')
-          ? 'FUEL'
-          : `${document.category.value?.toUpperCase()}`,
+        pin,
+        descOfGoods,
         vatValue: `${document.totalTax.value}`,
         taxableValue: `${document.totalNet.value}`,
         totalAmount: `${document.totalAmount.value}`,

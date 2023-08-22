@@ -26,7 +26,7 @@ export default async function handler(
     // write to rows
     const appendRes = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Sheet1',
+      range: 'August 2023',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [recieptInfo],
@@ -47,11 +47,9 @@ export default async function handler(
   } catch (error: any) {
     console.log(error);
 
-    res
-      .status(200)
-      .json({
-        success: false,
-        message: error.message || 'Something went wrong',
-      });
+    res.status(200).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+    });
   }
 }
